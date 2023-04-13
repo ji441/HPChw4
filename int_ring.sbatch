@@ -11,4 +11,4 @@
 module purge 
 module load  amber/openmpi/intel/20.06 
 
-mpiexec ./int_ring 4
+mpiexec ./int_ring 1000
