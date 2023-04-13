@@ -4,7 +4,7 @@
 #SBATCH --nodes=3
 #SBATCH --tasks-per-node=1
 #SBATCH --mem=1GB 
-#SBATCH --time=00:030:00 
+#SBATCH --time=00:30:00 
 #SBATCH --output=int_ring.out
 #SBATCH --verbose
 
