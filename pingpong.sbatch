@@ -6,6 +6,7 @@
 #SBATCH --mem=1GB 
 #SBATCH --time=00:20:00 
 #SBATCH --verbose
+#SBATCH --output=pingpong.out
 
 module purge 
 module load  amber/openmpi/intel/20.06 

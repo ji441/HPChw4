@@ -26,18 +26,18 @@ int main(int argc, char* argv[])
         MPI_Barrier(comm);//a barrier to make sure every node are in the same loop.
         MPI_Status status;
         if (rank == 0) {//first node just send and then receive
-            MPI_Send(&inte, 1, MPI_INT, 1, MPI_ANY_TAG, comm);
-            MPI_Recv(&inte, 1, MPI_INT, p - 1, MPI_ANY_TAG, comm, &status);
+            MPI_Send(&inte, 1, MPI_INT, 1, k, comm);
+            MPI_Recv(&inte, 1, MPI_INT, p - 1, k, comm, &status);
         }
         else if (rank == p - 1) {//last node receive and then send to first
-            MPI_Recv(&inte, 1, MPI_INT, p - 2, MPI_ANY_TAG, comm, &status);
+            MPI_Recv(&inte, 1, MPI_INT, p - 2, k, comm, &status);
             inte += rank;
-            MPI_Send(&inte, 1, MPI_INT, 0, MPI_ANY_TAG, comm);
+            MPI_Send(&inte, 1, MPI_INT, 0, k, comm);
         }
         else {//interior node receive and then send to next
-            MPI_Recv(&inte, 1, MPI_INT, rank - 1, MPI_ANY_TAG, comm, &status);
+            MPI_Recv(&inte, 1, MPI_INT, rank - 1, k, comm, &status);
             inte += rank;
-            MPI_Send(&inte, 1, MPI_INT, rank + 1, MPI_ANY_TAG, comm);
+            MPI_Send(&inte, 1, MPI_INT, rank + 1, k, comm);
         }
 
     }
