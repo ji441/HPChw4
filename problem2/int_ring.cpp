@@ -21,9 +21,9 @@ int main(int argc, char* argv[])
     MPI_Comm comm = MPI_COMM_WORLD;
     MPI_Comm_rank(comm, &rank);
     int inte = 0;
+    MPI_Barrier(comm);
     double tt = MPI_Wtime();
     for (int k = 0;k < N;k++) {
-        MPI_Barrier(comm);//a barrier to make sure every node are in the same loop.
         MPI_Status status;
         if (rank == 0) {//first node just send and then receive
             MPI_Send(&inte, 1, MPI_INT, 1, k, comm);
@@ -41,6 +41,8 @@ int main(int argc, char* argv[])
         }
 
     }
+    MPI_Barrier(comm);
     tt = MPI_Wtime() - tt;
-    if (!rank) printf("estimated latency: %e ms\n", tt / (N * p) * 1000);
+    if (!rank) printf("result is: %d,result should be: %d,estimated latency: %e ms\n", inte, p * (p - 1) * N / 2, tt / (N * p) * 1000);
+    MPI_Finalize();
 }

@@ -8,7 +8,7 @@ double time_pingpong(int proc0, int proc1, long Nrepeat, long Nsize, MPI_Comm co
     MPI_Comm_rank(comm, &rank);
 
     char* msg = (char*)malloc(Nsize);
-    for (long i = 0; i < Nsize; i++) msg[i] = 42;
+    for (long i = 0; i < Nsize; i++) msg[i] = 'c';
 
     MPI_Barrier(comm);
     double tt = MPI_Wtime();
@@ -42,8 +42,8 @@ int main(int argc, char** argv) {
         printf("Usage: mpirun ./pingpong <process-rank0> <process-rank1>\n");
         abort();
     }
-    int proc0 = atoi(argv[1]);
-    int proc1 = atoi(argv[2]);
+    int proc0 = 0;
+    int proc1 = 1;
 
     int rank;
     MPI_Comm comm = MPI_COMM_WORLD;

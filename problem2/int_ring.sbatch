@@ -7,6 +7,8 @@
 #SBATCH --time=00:30:00 
 #SBATCH --output=int_ring.out
 #SBATCH --verbose
+#SBATCH --mail-type=END
+#SBATCH --mail-user=qj2030@nyu.edu
 
 module purge 
 module load  amber/openmpi/intel/20.06 
